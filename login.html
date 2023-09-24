@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width-device-width, initial-scale=1.0">
+	<title>Login</title>
+	<!--googlefont-->
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+	<!--googlefont-->
+	<!--library-->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!--library-->
+	<!--LINK FOR CSS-->
+	<link rel="stylesheet" href="login.css">
+	<!--BOX ICONS-->
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<!--Preloader-->
+<div id="preloader">
+</div>
+<!--Preloader-->
+	<!--HEADER-->
+	<header>
+		<!--NAV-->
+		<div class="nav-container">
+			<a href="index.html" class="logo">Home</a>
+			<a href="login.html" class="logo">Login</a>
+			<a href="medicine.html" class="logo">Medicines</a>
+			<a href="contact.html" class="logo">Contact</a>
+    	</div>
+	</header>
+
+	<!--form-->
+
+<div class="container" id="container">
+<!--sign up-->
+	<div class="form sign-up-container">
+		<form action="#">
+			<h1>Create Account</h1>
+
+			
+			<span>Enter your details here...</span>
+			
+			<!--input-field-->
+			<div class="input-field">
+				<i class="fa fa-user"></i>
+				<input type="text" placeholder="Username">
+			</div>
+
+			<div class="input-field">
+				<i class="fa fa-envelope"></i>
+				<input type="email" placeholder="Email">
+			</div>
+
+			<div class="input-field">
+				<i class="fa fa-lock"></i>
+				<input type="password" placeholder="Password">
+			</div>
+			<div class="input-field">
+				<i class="fa fa-home"></i>
+				<input type="text" placeholder="Address">
+			</div>
+			<!--input-field-->
+
+			<button>Sign Up</button>
+		</form>
+	</div>
+	<!--sign-up-->
+
+	<!--sign in-->
+	<div class="form sign-in-container">
+		<form action="#">
+			<h1>Login</h1>
+			<span>Enter your valid login credentials</span>
+			
+			<!--input-field-->
+			<div class="input-field">
+				<i class="fa fa-user"></i>
+				<input type="text" placeholder="Username">
+			</div>
+
+			<div class="input-field">
+				<i class="fa fa-lock"></i>
+				<input type="password" placeholder="Password">
+			</div>
+			<!--input-field-->
+			<a href="#">Forgot Your Password</a>
+
+			<button>Sign In</button>
+		</form>
+	</div>
+
+	<!--sign in-->
+
+	<!--overlay-->
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal information</p>
+				<img src="image/s1.png" style="height: 25rem; width: 30rem; padding-top: 5%;">
+				<button class="btn" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello User!</h1>
+				<p>Enter Your personal details and start your journey with us</p>
+				<img src="image/s3.png" style="height: 25rem; width: 30rem;">
+				<button class="btn" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+	<!--overlay-->
+</div>
+	
+	<!--JAVASCRIPT-->
+
+<script>
+
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');	
+
+signUpButton.addEventListener('click',() =>{
+	container.classList.add("right-panel-active");
+	});
+
+signInButton.addEventListener('click',() =>{
+	container.classList.remove("right-panel-active");
+	});
+
+</script>
+<script>
+	var loader = document.getElementById("preloader");
+	window.addEventListener("load", function() {
+		loader.style.display = "none"
+	})
+</script>
+	
+	
+
+</body>
+</html>
