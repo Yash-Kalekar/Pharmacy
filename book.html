@@ -50,6 +50,7 @@
                                             <option value="consultant6">Dentist</option>
                                             <option value="consultant7">Hematologist</option>
                                             <option value="consultant8">Urology</option>
+                                            <option value="other">Other Then Specify</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
@@ -67,6 +68,9 @@
                                             <option value="female">Female</option>
                                         </select>
                                     </div>
+                                </div>
+                                <div class="row form-row" id="other-consultant-row" style="display: none;">
+                                    <input type="text" placeholder="Specify Consultant" class="form-control" id="other-consultant">
                                 </div>
                                 <div class="row form-row">
                                     <button type="submit" class="btn btn-success btn-custom">Book Appointment</button>
@@ -90,6 +94,14 @@
         $(document).ready(function () {
             $("#dat").datepicker();
 
+            $("#consultant").change(function () {
+                if ($(this).val() === "other") {
+                    $("#other-consultant-row").show();
+                } else {
+                    $("#other-consultant-row").hide();
+                }
+            });
+
             $("#appointment-form").submit(function (e) {
                 e.preventDefault(); // Prevent form submission
 
@@ -99,7 +111,7 @@
                     $("#mobile-number").val() === "" ||
                     $("#email").val() === "" ||
                     $("#appointment-date").val() === "" ||
-                    $("#consultant").val() === "" ||
+                    ($("#consultant").val() === "" || ($("#consultant").val() === "other" && $("#other-consultant").val() === "")) ||
                     $("#city").val() === "" ||
                     $("#age").val() === "" ||
                     $("#gender").val() === ""
