@@ -43,10 +43,50 @@ body{
 	box-shadow: none;
 	border: 3px solid #138496;
 }
-.btn-appointment{
-	background-color: #138496 !important;
-	border-color: #138496 !important;
-	width: 100%;
+.btn-appointment,
+.btn-cancel {
+    width: 100%;
+}
+
+/* Additional CSS for button styling */
+.btn-appointment,
+.btn-cancel {
+    background-color: #138496 !important;
+    border-color: #138496 !important;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-appointment:hover,
+.btn-cancel:hover {
+    background-color: #0b6b82 !important;
+    border-color: #0b6b82 !important;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+.btn-custom {
+    width: 100%;
+    background-color: #138496 !important;
+    border-color: #138496 !important;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block; /* Ensure buttons take up the full width */
+    text-decoration: none; /* Remove underline from anchor element */
+    color: #fff; /* Button text color */
+}
+
+.btn-custom:hover {
+    background-color: #0b6b82 !important;
+    border-color: #0b6b82 !important;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 .content{
 	margin-top: 15%;
@@ -75,6 +115,14 @@ body{
 }
 
 
-@media screen and (max-width: 976px){
-	
+@media screen and (max-width: 768px) {
+    .btn-appointment,
+    .btn-cancel {
+        font-size: 16px;
+        padding: 8px;
+    }
+    .btn-custom {
+        font-size: 16px;
+        padding: 8px;
+    }
 }

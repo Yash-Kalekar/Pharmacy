@@ -47,12 +47,20 @@ function ready(){
 }
 //BUY BUTTON
 function buyButtonClicked() {
-	alert("Your Order is placed");
-	var cartcontent = document.getElementsByClassName("cart-content")[0];
-	while (cartcontent.hasChildNodes()) {
-		cartcontent.removeChild(cartcontent.firstChild);
-	}
-	updatetotal();
+    var cartItems = document.getElementsByClassName("cart-box");
+
+    // Check if the cart is empty
+    if (cartItems.length === 0) {
+        alert("Please add items to the cart before buying.");
+        return;
+    }
+
+    alert("Your Order is placed");
+    var cartcontent = document.getElementsByClassName("cart-content")[0];
+    while (cartcontent.hasChildNodes()) {
+        cartcontent.removeChild(cartcontent.firstChild);
+    }
+    updatetotal();
 }
 
 //REMOVE ITEMS FROM CART

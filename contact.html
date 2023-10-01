@@ -46,19 +46,19 @@
                     <h2 class="form-title">Send us a message</h2>
                     <div class="form-fields">
                         <div class="form-group">
-                            <input type="text" class="fname" placeholder="First Name">
+                            <input type="text" class="fname" id="fname" placeholder="First Name">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="lname" placeholder="Last Name">
+                            <input type="text" class="lname" id="lname" placeholder="Last Name">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="email" placeholder="Mail">
+                            <input type="email" class="email" id="email" placeholder="Mail">
                         </div>
                         <div class="form-group">
-                            <input type="tel" class="phone" placeholder="Phone">
+                            <input type="tel" class="phone" id="phone" placeholder="Phone">
                         </div>
                         <div class="form-group">
-                            <textarea name="message" id="" placeholder="Write your message"></textarea>
+                            <textarea name="message" id="message" placeholder="Write your message"></textarea>
                         </div>
                     </div>
                     <input type="submit" value="Send Message" class="submit-button">
@@ -102,8 +102,43 @@
 		loader.style.display = "none"
 	})
 </script>
+<script>
+// Function to handle form submission
+function handleSubmit(event) {
+    event.preventDefault(); // Prevent the form from actually submitting
 
+    // Get the input fields by their IDs
+    var firstNameInput = document.getElementById("fname");
+    var lastNameInput = document.getElementById("lname");
+    var emailInput = document.getElementById("email");
+    var phoneInput = document.getElementById("phone");
+    var messageInput = document.getElementById("message");
 
+    // Check if any of the input fields are empty
+    if (
+        firstNameInput.value === "" ||
+        lastNameInput.value === "" ||
+        emailInput.value === "" ||
+        phoneInput.value === "" ||
+        messageInput.value === ""
+    ) {
+        alert("Please fill in all required fields.");
+    } else {
+        // All fields are filled, proceed with form submission
+
+        // Display an alert message
+        alert("Your message has been sent!");
+
+        // Refresh the page
+        location.reload();
+    }
+}
+
+// Get the form element and attach the handleSubmit function to its submit event
+var form = document.querySelector("form");
+form.addEventListener("submit", handleSubmit);
+
+</script>
 
 </body>
 </html>
