@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Checkout Form</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+<!--Preloader-->
+<div id="preloader">
+</div>
+<!--Preloader-->
+<div class="wrapper">
+  <div class="payment">
+    <div class="payment-logo">
+      <p>p</p>
+    </div>
+    
+    <h2>Payment Gateway</h2>
+    <div class="form">
+      <span>Cards Accepted :</span>
+      <img src="images/card_img.png" alt="">
+    </div>
+    
+    <div class="card space icon-relative">
+      <label class="label">Card holder:</label>
+      <input type="text" class="input" placeholder="Card Holder's Name">
+      <i class="fas fa-user"></i>
+    </div>
+    
+    <div class="card space icon-relative">
+      <label class="label">Card number:</label>
+      <input type="text" class="input" data-mask="0000 0000 0000 0000" placeholder="Card Number">
+      <i class="far fa-credit-card"></i>
+    </div>
+    
+    <div class="card-grp space">
+      <div class="card-item icon-relative">
+        <label class="label">Expiry date:</label>
+        <input type="text" name="expiry-data" class="input" data-mask="00 / 00"  placeholder="00 / 00">
+        <i class="far fa-calendar-alt"></i>
+      </div>
+      
+      <div class="card-item icon-relative">
+        <label class="label">CVC:</label>
+        <input type="text" class="input" data-mask="000" placeholder="000">
+        <i class="fas fa-lock"></i>
+      </div>
+    </div>
+        
+    <a href="#" class="btn" id="payBtn">Pay</a>
+  </div>
+</div>
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h2>Payment Successful</h2>
+    <p>Thank you for your payment.</p>
+    <button class="popup-close-btn" id="popup-close-btn">Close</button>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script>
+  // Function to show the popup
+  function showPopup() {
+    document.getElementById("popup").style.display = "block";
+  }
+
+  // Function to close the popup
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    window.location.href = "medicine.html";
+  }
+
+  // Function to validate the form before showing the popup
+  function validateForm() {
+    var cardHolder = document.querySelector(".card input");
+    var cardNumber = document.querySelector(".card input[data-mask]");
+    var expiryDate = document.querySelector(".card-item input[name='expiry-data']");
+    var cvc = document.querySelector(".card-item input[data-mask]");
+
+    if (cardHolder.value === "" || cardNumber.value === "" || expiryDate.value === "" || cvc.value === "") {
+      alert("Please fill in all required fields.");
+      return false;
+    }
+
+    // You can add more specific validation rules here if needed.
+
+    showPopup();
+    return false;
+  }
+
+  // Event listener for the Pay button
+  document.getElementById("payBtn").addEventListener("click", validateForm);
+
+  // Event listener for the popup close button
+  document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+  // Event listener for the popup close icon
+  document.getElementById("popup-close").addEventListener("click", closePopup);
+</script>
+<script>
+  var loader = document.getElementById("preloader");
+  window.addEventListener("load", function() {
+    loader.style.display = "none"
+  })
+  </script>
+</body>
+</html>

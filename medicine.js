@@ -11,40 +11,55 @@ closeCart.onclick = () => {
     cart.classList.remove("active");
 };
 
-
-//CART WORKING JS
+// Initialize cart items from local storage
+let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 if (document.readyState == "loading") {
-	document.addEventListener("DOMContentLoaded", ready);
+    document.addEventListener("DOMContentLoaded", ready);
 } else {
-	ready();
+    ready();
 }
 
 //MAKING FUNCTION
 function ready(){
-	//REMOVE ITEMS FROM CART
-	var removeCartButtons = document.getElementsByClassName("cart-remove")
-	console.log(removeCartButtons)
-	for (var i = 0; i < removeCartButtons.length; i++){
-		var button = removeCartButtons[i]
-		button.addEventListener('click', removeCartItem)
-	}
-	//QUANTITY CHANGES
-	var quantityInputs = document.getElementsByClassName("cart-quantity");
-	for (var i = 0; i < quantityInputs.length; i++) {
-		var input = quantityInputs[i];
-		input.addEventListener("change", quantityChanged);
-	}
-	//ADD TO CART
-	var addCart = document.getElementsByClassName("add-cart");
-	for (var i = 0; i < addCart.length; i++) {
-		var button = addCart[i];
-		button.addEventListener("click", addCartClicked);
-	}
-	//BUY BUTTON WORK
-	document
-		.getElementsByClassName("btn-buy")[0]
-		.addEventListener("click", buyButtonClicked);
+    loadCart();
+    //REMOVE ITEMS FROM CART
+    var removeCartButtons = document.getElementsByClassName("cart-remove");
+    console.log(removeCartButtons)
+    for (var i = 0; i < removeCartButtons.length; i++){
+        var button = removeCartButtons[i];
+        button.addEventListener('click', removeCartItem);
+    }
+    //QUANTITY CHANGES
+    var quantityInputs = document.getElementsByClassName("cart-quantity");
+    for (var i = 0; i < quantityInputs.length; i++) {
+        var input = quantityInputs[i];
+        input.addEventListener("change", quantityChanged);
+    }
+    //ADD TO CART
+    var addCart = document.getElementsByClassName("add-cart");
+    for (var i = 0; i < addCart.length; i++) {
+        var button = addCart[i];
+        button.addEventListener("click", addCartClicked);
+    }
+    //BUY BUTTON WORK
+    document
+        .getElementsByClassName("btn-buy")[0]
+        .addEventListener("click", buyButtonClicked);
+
+    // Load cart items from local storage
+    loadCart();
 }
+
+// Load cart items from local storage
+function loadCart() {
+    var cartContent = document.getElementsByClassName("cart-content")[0];
+    cartContent.innerHTML = ''; // Clear existing cart content
+    cartItems.forEach(item => {
+        addProductToCart(item.title, item.price, item.productImg);
+    });
+    updatetotal();
+}
+
 //BUY BUTTON
 function buyButtonClicked() {
     var cartItems = document.getElementsByClassName("cart-box");
@@ -52,30 +67,28 @@ function buyButtonClicked() {
     // Check if the cart is empty
     if (cartItems.length === 0) {
         alert("Please add items to the cart before buying.");
-        return;
-    }
-
-    alert("Your Order is placed");
-    var cartcontent = document.getElementsByClassName("cart-content")[0];
-    while (cartcontent.hasChildNodes()) {
-        cartcontent.removeChild(cartcontent.firstChild);
+    } else {
+         window.location.href = "payment.html";
     }
     updatetotal();
 }
 
 //REMOVE ITEMS FROM CART
 function removeCartItem(event){
-	var buttonClicked = event.target
-	buttonClicked.parentElement.remove();
-	updatetotal(); 
+    var buttonClicked = event.target
+    buttonClicked.parentElement.remove();
+    updatetotal(); 
+    updateCartStorage();
 }
+
 //QUANTITY CHANGES
 function quantityChanged(event){
-	var input = event.target;
-	if (isNaN(input.value) || input.value <= 0) {
-		input.value = 1;
-	}		
-	updatetotal();
+    var input = event.target;
+    if (isNaN(input.value) || input.value <= 0) {
+        input.value = 1;
+    }       
+    updatetotal();
+    updateCartStorage();
 }
 
 // ADD TO CART
@@ -87,6 +100,7 @@ function addCartClicked(event) {
     var productImg = shopProducts.getElementsByClassName("product-img")[0].src;
     addProductToCart(title, price, productImg);
     updatetotal();
+    updateCartStorage();
 }
 
 function addProductToCart(title, price, productImg) {
@@ -96,10 +110,10 @@ function addProductToCart(title, price, productImg) {
     var cartItemsNames = cartItems.getElementsByClassName("cart-product-title");
     
     for (var i = 0; i < cartItemsNames.length; i++) {
-    	if (cartItemsNames[i].innerText == title) {
-    		alert("You have already added this item to the cart");
+        if (cartItemsNames[i].innerText == title) {
+            alert("You have already added this item to the cart");
             return;
-    	}  
+        }  
     }
 
     var cartBoxContent = `
@@ -122,47 +136,67 @@ function addProductToCart(title, price, productImg) {
     cartShopBox
         .getElementsByClassName('cart-quantity')[0]
         .addEventListener('change', quantityChanged);
-}
 
+    updateCartStorage();
+}
 
 //UPDATE TOTAL
 function updatetotal() {
-	var cartContent = document.getElementsByClassName("cart-content")[0];
-	var cartBoxes = cartContent.getElementsByClassName("cart-box");
-	var total = 0;
-	for (var i=0; i < cartBoxes.length; i++) {
-		var cartBox = cartBoxes[i];
-		var priceElement = cartBox.getElementsByClassName("cart-price")[0];
-		var quantityElement = cartBox.getElementsByClassName("cart-quantity")[0];
-		var price = parseFloat(priceElement.innerText.replace("₹", ""));
-		var quantity = quantityElement.value;
-		total = total + price * quantity;
-	}	
-		//IF PRICE CONTAIN SOME CENTS VALUE
-		total = Math.round(total * 100) / 100;
+    var cartContent = document.getElementsByClassName("cart-content")[0];
+    var cartBoxes = cartContent.getElementsByClassName("cart-box");
+    var total = 0;
+    for (var i=0; i < cartBoxes.length; i++) {
+        var cartBox = cartBoxes[i];
+        var priceElement = cartBox.getElementsByClassName("cart-price")[0];
+        var quantityElement = cartBox.getElementsByClassName("cart-quantity")[0];
+        var price = parseFloat(priceElement.innerText.replace("₹", ""));
+        var quantity = quantityElement.value;
+        total = total + price * quantity;
+    }   
+    //IF PRICE CONTAIN SOME CENTS VALUE
+    total = Math.round(total * 100) / 100;
 
-		document.getElementsByClassName("total-price")[0].innerText="₹" + total;
-	
+    document.getElementsByClassName("total-price")[0].innerText="₹" + total;
 }
 
-const search = () =>{
-	const searchbox = document.getElementById("search-item").value.toUpperCase();
-	const storeitems = document.getElementById("shop-content")
-	const product = document.querySelectorAll(".product-box")
-	const pname = document.getElementsByTagName("h2")
+// Update cart items in local storage
+function updateCartStorage() {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+}
+// Load cart items from local storage
+function loadCart() {
+    var cartContent = document.querySelector(".cart-content");
+    cartContent.innerHTML = ''; // Clear existing cart content
+    cartItems.forEach(item => {
+        addProductToCart(item.title, item.price, item.productImg);
+    });
+    updatetotal();
+}
+// Function to handle search button click
+function search() {
+    const searchbox = document.getElementById("search-item").value.toUpperCase();
+    const productBoxes = document.getElementsByClassName("product-box");
+    let medicineFound = false;
 
-	for (var i=0; i < pname.length; i++) {
-		let match = product[i].getElementsByTagName('h2')[0];
+    for (let i = 0; i < productBoxes.length; i++) {
+        const productName = productBoxes[i].getElementsByClassName("product-title")[0].innerText.toUpperCase();
 
-		if (match) {
-			let textValue = match.textContent || match.innerHTML
+        if (productName.includes(searchbox)) {
+            productBoxes[i].style.display = "";
+            medicineFound = true;
+        } else {
+            productBoxes[i].style.display = "none";
+        }
+    }
 
-			if (textValue.toUpperCase().indexOf(searchbox) > -1) {
-				product[i].style.display = "";
-			} else {
-				product[i].style.display = "none";
-			}
-		}
-	}
+    // Show "Medicine Not Found" message if no medicine is found
+    const notFoundMessage = document.getElementById("medicine-not-found");
+    if (!medicineFound) {
+        notFoundMessage.style.display = "block";
+    } else {
+        notFoundMessage.style.display = "none";
+    }
 }
 
+// Load cart items on page load
+loadCart();
