@@ -73,6 +73,7 @@ function buyButtonClicked() {
     updatetotal();
 }
 
+
 //REMOVE ITEMS FROM CART
 function removeCartItem(event){
     var buttonClicked = event.target
