@@ -7,7 +7,42 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/datepicker.css">
     <link rel="stylesheet" href="assets/css/book.css">
+        <!--BOX ICONS-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 </head>
+    <!--HEADER-->
+    <header class="header">
+        <!--NAV-->
+        <div class="nav-container">
+            <a href="index.html" class="logo">Home</a>
+            <a href="login.html" class="logo">Login</a>
+            <a href="medicine.html" class="logo">Medicines</a>
+            <a href="contact.html" class="logo">Contact</a>
+        
+                        <!--CART ICON-->
+            <i class='bx bx-calendar' id="cart-icon"></i>
+            
+            
+            <!--CART-->
+            <div class="cart">
+                <h2 class="cart-title">Your Appointments</h2>
+                <!--CONTENT-->
+                <div class="cart-content">
+                    
+                </div>
+                <div class="cart-content">
+    <!-- Appointment details will be displayed here -->
+                </div>
+                <!--BUY BUTTON-->
+                
+                <!--Cart Close-->
+                <i class="bx bx-x" id="close-cart"></i>
+            </div>
+
+
+    </header>
+
 <body>
     <div class="inner-layer">
         <div class="container">
@@ -91,42 +126,6 @@
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/bootstrap-datepicker.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#dat").datepicker();
-
-            $("#consultant").change(function () {
-                if ($(this).val() === "other") {
-                    $("#other-consultant-row").show();
-                } else {
-                    $("#other-consultant-row").hide();
-                }
-            });
-
-            $("#appointment-form").submit(function (e) {
-                e.preventDefault(); // Prevent form submission
-
-                // Check if any required field is empty
-                if (
-                    $("#full-name").val() === "" ||
-                    $("#mobile-number").val() === "" ||
-                    $("#email").val() === "" ||
-                    $("#appointment-date").val() === "" ||
-                    ($("#consultant").val() === "" || ($("#consultant").val() === "other" && $("#other-consultant").val() === "")) ||
-                    $("#city").val() === "" ||
-                    $("#age").val() === "" ||
-                    $("#gender").val() === ""
-                ) {
-                    alert("Please fill in all required fields.");
-                } else {
-                    // All fields are filled, proceed with form submission
-                    alert("Appointment booked successfully!");
-
-                    // Redirect to the index page
-                    window.location.href = "index.html";
-                }
-            });
-        });
-    </script>
+    <script src="book.js"></script>
 </body>
 </html>
