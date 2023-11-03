@@ -49,14 +49,23 @@ header{
 	align-items: center;
 	justify-content: space-evenly;
 	padding: 29px;
+	text-decoration: none;
 }
 .logo{
 	font-size: 180%;
 	color: var(--text-color);
 	font-weight: 400;
+	text-decoration: none;
 
 }
 
+span{
+
+	font-size: 250%;
+	color: var(--text-color);
+	font-weight: 400;
+
+}
 
 /*header*/
 .inner-layer{
@@ -242,7 +251,7 @@ header{
     margin-left: auto;
 }
 .cart-remove{
-	font-size: 20px;
+	font-size: 60px;
 	color: var(--main-color);
 	cursor: pointer;
 }

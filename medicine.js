@@ -2,9 +2,22 @@
 let cartIcon = document.querySelector("#cart-icon");
 let cart = document.querySelector(".cart");
 let closeCart = document.querySelector("#close-cart");
+
+
+function closeCartOnClickOutside() {
+    document.addEventListener('click', function(event) {
+        const cart = document.querySelector('.cart');
+        if (event.target !== cart && !cart.contains(event.target) && event.target !== cartIcon) {
+            cart.classList.remove('active');
+        }
+    });
+}
+
+
 //OPEN CART
 cartIcon.onclick = () => {
     cart.classList.add("active");
+    closeCartOnClickOutside();
 };
 //CLOSE CART
 closeCart.onclick = () => {

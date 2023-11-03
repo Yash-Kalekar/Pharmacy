@@ -3,15 +3,32 @@ let cartIcon = document.querySelector("#cart-icon");
 let cart = document.querySelector(".cart");
 let closeCart = document.querySelector("#close-cart");
 
+function closeCartOnClickOutside() {
+    document.addEventListener('click', function(event) {
+        const cart = document.querySelector('.cart');
+        if (event.target !== cart && !cart.contains(event.target) && event.target !== cartIcon) {
+            cart.classList.remove('active');
+        }
+    });
+}
+
+
 // OPEN CART
 cartIcon.addEventListener("click", () => {
     cart.classList.add("active");
+    closeCartOnClickOutside();
 });
 
 // CLOSE CART
 closeCart.addEventListener("click", () => {
     cart.classList.remove("active");
 });
+
+function generateRandomId() {
+    // Generate a random 6-digit ID
+    return Math.floor(100000 + Math.random() * 900000);
+}
+
 
 $(document).ready(function () {
     $("#dat").datepicker();
@@ -83,8 +100,7 @@ $(document).ready(function () {
             // Reset the form
             $("#appointment-form")[0].reset();
 
-            // Show the "appointment booked successfully" alert
-            alert("Appointment booked successfully!");
+            
         }
     });
 
@@ -94,9 +110,13 @@ $(document).ready(function () {
         const cartItem = document.createElement("div");
         cartItem.classList.add("cart-box");
 
+        const randomId = generateRandomId();
+
+
         // Create the appointment details content
         const appointmentDetails = `
             <div class="detail-box">
+                <div class="cart-product-title">ID: ${randomId}</div>
                 <div class="cart-product-title">Name: ${appointment.name}</div>
                 <div class="cart-product-title">Date: ${appointment.date}</div>
                 <div class="cart-product-title">Consultant: ${appointment.consultant}</div>

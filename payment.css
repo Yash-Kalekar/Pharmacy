@@ -1,193 +1,113 @@
-@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Ubuntu');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
 
 *{
-  margin: 0;
-  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  margin:0; padding:0;
   box-sizing: border-box;
-  font-family: 'Ubuntu', sans-serif;
+  outline: none; border:none;
+  text-transform: capitalize;
+  transition: all .2s linear;
 }
 
-body{
-
-  background: #2196F3;
-  margin: 0 10px;
-}
-
-.payment{
-  background: #f8f8f8;
-  max-width: 360px;
-  margin: 100px auto;
-  height: auto;
-  padding: 35px;
-  padding-top: 70px;
-  border-radius: 5px;
-  position: relative;
-}
-
-.payment h2{
-  text-align: center;
-  letter-spacing: 2px;
-  margin-bottom: 40px;
-  color: #0d3c61;
-}
-
-.form .label{
-  display: block;
-  color: #555555;
-  margin-bottom: 6px;
-}
-
-.input{
-  padding: 13px 0px 13px 25px;
-  width: 100%;
-  text-align: center;
-  border: 2px solid #dddddd;
-  border-radius: 5px;
-  letter-spacing: 1px;
-  word-spacing: 3px;
-  outline: none;
-  font-size: 16px;
-  color: #555555;
-}
-
-.card-grp{
+.container{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  padding:25px;
+  min-height: 100vh;
+  background: linear-gradient(90deg, #2ecc71 60%, #27ae60 40.1%);
 }
 
-.card-item{
-  width: 48%;
+.container form{
+  padding:20px;
+  width:700px;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0,0,0,.1);
 }
 
-.space{
-  margin-bottom: 20px;
+.container form .row{
+  display: flex;
+  flex-wrap: wrap;
+  gap:15px;
 }
 
-.icon-relative{
-  position: relative;
+.container form .row .col{
+  flex:1 1 250px;
 }
 
-.icon-relative .fas,
-.icon-relative .far{
-  position: absolute;
-  bottom: 12px;
-  left: 15px;
+.container form .row .col .title{
   font-size: 20px;
-  color: #555555;
+  color:#333;
+  padding-bottom: 5px;
+  text-transform: uppercase;
 }
 
-.btn {
-  margin-top: 40px;
-  background: #2196F3;
-  padding: 12px 135px; /* Increase the padding to make the button wider */
-  text-align: center;
-  color: #f8f8f8;
-  border-radius: 5px;
-  cursor: pointer;
+.container form .row .col .inputBox{
+  margin:15px 0;
 }
 
-.payment-logo{
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 100px;
-  background: #f8f8f8;
-  border-radius: 50%;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
-  text-align: center;
-  line-height: 85px;
+.container form .row .col .inputBox span{
+  margin-bottom: 10px;
+  display: block;
 }
 
-.payment-logo:before{
-  content: "";
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 90px;
-  height: 90px;
-  background: #2196F3;
-  border-radius: 50%;
-}
-
-.payment-logo p{
-  position: relative;
-  color: #f8f8f8;
-  font-family: 'Baloo Bhaijaan', cursive;
-  font-size: 58px;
-}
-
-.popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
+.container form .row .col .inputBox input{
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  border:1px solid #ccc;
+  padding:10px 15px;
+  font-size: 15px;
+  text-transform: none;
 }
 
-.popup-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
+.container form .row .col .inputBox input:focus{
+  border:1px solid #000;
 }
 
-.popup-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 20px;
+.container form .row .col .flex{
+  display: flex;
+  gap:15px;
 }
 
-.popup-close-btn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #2196F3;
+.container form .row .col .flex .inputBox{
+  margin-top: 5px;
+}
+
+.container form .row .col .inputBox img{
+  height: 34px;
+  margin-top: 5px;
+  filter: drop-shadow(0 0 1px #000);
+}
+
+.container form .submit-btn2 {
+  width: 100%;
+  padding: 12px;
+  font-size: 17px;
+  background: #27ae60;
   color: #fff;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
+  text-decoration: none; /* Add text-decoration property to preserve link styling */
+  display: inline-block; /* Add this property to ensure proper width */
+  text-align: center; /* Center the text */
+  margin-bottom: 10px; /* Add margin to create space between buttons */
 }
 
-@media screen and (max-width: 420px){
-  .card-grp{
-    flex-direction: column;
-  }
-  .card-item{
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  .btn{
-    margin-top: 20px;
-  }
+.container form .submit-btn2:hover {
+  background: #2ecc71;
 }
 
-/*preloader*/
-#preloader {
-  background: #FFFFFF url(image/loader.gif) no-repeat center center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Make sure it's above other content */
+.container form .return-home-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 17px;
+  background: #27ae60;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none; /* Add text-decoration property to preserve link styling */
+  display: inline-block; /* Add this property to ensure proper width */
+  text-align: center; /* Center the text */
+  margin-top: 10px; /* Add margin to create space between buttons */
 }
 
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.container form .return-home-btn:hover {
+  background: #2ecc71;
 }
