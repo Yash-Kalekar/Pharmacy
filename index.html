@@ -660,5 +660,21 @@
         },
       });
     </script>
+
+<script>
+    // Function to get query parameters from the URL
+    function getQueryParam(param) {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        return urlSearchParams.get(param);
+    }
+
+    // Check if the 'order_id' query parameter is present
+    const orderId = getQueryParam('order_id');
+    if (orderId) {
+        // Display a pop-up message with the order confirmation and orderId
+        const message = `Your order has been placed, and your order ID is ${orderId}`;
+        alert(message);
+    }
+</script>
 </body>
 </html>
