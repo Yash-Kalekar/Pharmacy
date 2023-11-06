@@ -27,10 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cnum = $_POST["cnum"];
     $expiry = $_POST["expiry"];
     $cvv = $_POST["cvv"];
+    $randomId = mt_rand(100000, 999999);
 
 
     // Insert user data into the database
-    $sql = "INSERT INTO payment (email, address, district, state, pincode, cname, cnum, expiry, cvv) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO payment (email, address, district, state, pincode, cname, cnum, expiry, cvv,randomId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     // Execute the SQL statement (make sure to establish a database connection first)
     // You should use prepared statements to prevent SQL injection
@@ -38,11 +39,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $your_db_connection->prepare($sql);
     
     if ($stmt) {
-        $stmt->bind_param("ssssssssi", $email, $address, $district, $state, $pincode, $cname, $cnum, $expiry, $cvv);
+        $stmt->bind_param("ssssssssii", $email, $address, $district, $state, $pincode, $cname, $cnum, $expiry, $cvv, $randomId);
         if ($stmt->execute()) {
             // Registration successful, display an alert and redirect
             echo '<script type="text/javascript">alert("Payment successful!");</script>';
             echo '<script type="text/javascript">window.location = "medicine.html";</script>';
+            header("Location: index.html?order_id=$randomId");
+            exit;
         } else {
             echo "Error: " . $stmt->error;
         }
